@@ -1,0 +1,81 @@
+#include <stdio.h>  
+#include <stdlib.h>  
+  
+struct node {  
+    int element;  
+    struct node* left;  
+    struct node* right;  
+};  
+struct node* createNode(int val)  
+{  
+    struct node* Node = (struct node*)malloc(sizeof(struct node));  
+    Node->element = val;  
+    Node->left = NULL;  
+    Node->right = NULL;  
+  
+    return (Node);  
+}  
+  
+/*function to traverse the nodes of binary tree in preorder*/  
+void traversePreorder(struct node* root)  
+{  
+    if (root == NULL)  
+        return;  
+    printf(" %d ", root->element);  
+    traversePreorder(root->left);  
+    traversePreorder(root->right);  
+}  
+void traverseInorder(struct node* root)  
+{  
+    if (root == NULL)  
+        return;  
+    traverseInorder(root->left);  
+    printf(" %d ", root->element);  
+    traverseInorder(root->right);  
+}  
+void traversePostorder(struct node* root)  
+{  
+    if (root == NULL)  
+        return;  
+    traversePostorder(root->left);  
+    traversePostorder(root->right);  
+    printf(" %d ", root->element);  
+}  
+  
+  
+int main()  
+{  
+    struct node* root = createNode(36);  
+    root->left = createNode(26);  
+    root->right = createNode(46);  
+    root->left->left = createNode(21);  
+    root->left->right = createNode(31);  
+    root->left->left->left = createNode(11);  
+    root->left->left->right = createNode(24);  
+    root->right->left = createNode(41);  
+    root->right->right = createNode(56);  
+    root->right->right->left = createNode(51);  
+    root->right->right->right = createNode(66);  
+  
+    printf("\n The Preorder traversal of given binary tree is -\n");  
+    traversePreorder(root);  
+      
+    printf("\n The Inorder traversal of given binary tree is -\n");  
+    traverseInorder(root);  
+      
+    printf("\n The Postorder traversal of given binary tree is -\n");  
+    traversePostorder(root);  
+  
+    return 0;  
+}    
+
+
+OUTPUT:
+
+
+ The Preorder traversal of given binary tree is -
+ 36  26  21  11  24  31  46  41  56  51  66
+ The Inorder traversal of given binary tree is -
+ 11  21  24  26  31  36  41  46  51  56  66
+ The Postorder traversal of given binary tree is -
+ 11  24  21  31  26  41  51  66  56  46  36
